@@ -1,0 +1,254 @@
+{
+  "errors": [],
+  "generated_at": "2026-05-23T06:42:08Z",
+  "metrics": {
+    ".\\app.py": {
+      "CONFIDENCE.HIGH": 3,
+      "CONFIDENCE.LOW": 1,
+      "CONFIDENCE.MEDIUM": 6,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 2,
+      "SEVERITY.LOW": 7,
+      "SEVERITY.MEDIUM": 1,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 203,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "_totals": {
+      "CONFIDENCE.HIGH": 3,
+      "CONFIDENCE.LOW": 1,
+      "CONFIDENCE.MEDIUM": 6,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 2,
+      "SEVERITY.LOW": 7,
+      "SEVERITY.MEDIUM": 1,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 203,
+      "nosec": 0,
+      "skipped_tests": 0
+    }
+  },
+  "results": [
+    {
+      "code": "20 import hashlib\n21 import subprocess\n22 import sqlite3\n",
+      "col_offset": 0,
+      "end_col_offset": 17,
+      "filename": ".\\app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Consider possible security implications associated with the subprocess module.",
+      "line_number": 21,
+      "line_range": [
+        21
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess",
+      "test_id": "B404",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "31 API_KEY = \"sk-1234567890abcdefghijklmnop\"  # Hardcoded API key\n32 DATABASE_PASSWORD = \"admin123\"  # Hardcoded database password\n33 SECRET_TOKEN = \"my-secret-token-12345\"  # Hardcoded secret\n",
+      "col_offset": 20,
+      "end_col_offset": 30,
+      "filename": ".\\app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'admin123'",
+      "line_number": 32,
+      "line_range": [
+        32
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "32 DATABASE_PASSWORD = \"admin123\"  # Hardcoded database password\n33 SECRET_TOKEN = \"my-secret-token-12345\"  # Hardcoded secret\n34 \n",
+      "col_offset": 15,
+      "end_col_offset": 38,
+      "filename": ".\\app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'my-secret-token-12345'",
+      "line_number": 33,
+      "line_range": [
+        33
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "42         self.db_user = \"admin\"\n43         self.db_pass = \"password123\"\n44         self.db_host = \"localhost\"\n",
+      "col_offset": 23,
+      "end_col_offset": 36,
+      "filename": ".\\app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password123'",
+      "line_number": 43,
+      "line_range": [
+        43
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "74         # VULNERABLE: Using MD5 hash (deprecated, fast brute-force attacks)\n75         return hashlib.md5(password.encode()).hexdigest()\n76 \n",
+      "col_offset": 15,
+      "end_col_offset": 45,
+      "filename": ".\\app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 327,
+        "link": "https://cwe.mitre.org/data/definitions/327.html"
+      },
+      "issue_severity": "HIGH",
+      "issue_text": "Use of weak MD5 hash for security. Consider usedforsecurity=False",
+      "line_number": 75,
+      "line_range": [
+        75
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b324_hashlib.html",
+      "test_id": "B324",
+      "test_name": "hashlib"
+    },
+    {
+      "code": "93             # Example attack: username=\"admin' --\" bypasses password check\n94             query = f\"SELECT * FROM users WHERE username='{username}' AND password='{self.hash_password(password)}'\"\n95 \n",
+      "col_offset": 22,
+      "end_col_offset": 58,
+      "filename": ".\\app.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 94,
+      "line_range": [
+        94
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "122             # Using shell=True makes it more dangerous\n123             result = subprocess.run(command, shell=True, capture_output=True, text=True)\n124             \n",
+      "col_offset": 21,
+      "end_col_offset": 88,
+      "filename": ".\\app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "HIGH",
+      "issue_text": "subprocess call with shell=True identified, security issue.",
+      "line_number": 123,
+      "line_range": [
+        123
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b602_subprocess_popen_with_shell_equals_true.html",
+      "test_id": "B602",
+      "test_name": "subprocess_popen_with_shell_equals_true"
+    },
+    {
+      "code": "200         \"db_user\": \"admin\",\n201         \"db_pass\": \"SuperSecret123!\",  # Hardcoded password\n202         \"api_endpoint\": \"https://api.example.com\",\n203         \"api_key\": \"sk_live_51234567890\",  # Live API key hardcoded\n204         \"debug_mode\": True,  # Debug mode enabled in production\n205         \"log_level\": \"DEBUG\",  # Debug logging enabled\n206         \"jwt_secret\": \"my-super-secret-key-123\",  # JWT secret hardcoded\n207     }\n208 \n209     @staticmethod\n210     def get_config(key: str) -> str:\n211         \"\"\"Get configuration value.\"\"\"\n212         return ConfigManager.CONFIG.get(key, \"\")\n",
+      "col_offset": 8,
+      "end_col_offset": 17,
+      "filename": ".\\app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'SuperSecret123!'",
+      "line_number": 201,
+      "line_range": [
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "205         \"log_level\": \"DEBUG\",  # Debug logging enabled\n206         \"jwt_secret\": \"my-super-secret-key-123\",  # JWT secret hardcoded\n207     }\n208 \n209     @staticmethod\n210     def get_config(key: str) -> str:\n211         \"\"\"Get configuration value.\"\"\"\n212         return ConfigManager.CONFIG.get(key, \"\")\n213 \n214 \n215 class FileHandler:\n216     \"\"\"Handles file operations with security issues.\"\"\"\n217 \n",
+      "col_offset": 8,
+      "end_col_offset": 20,
+      "filename": ".\\app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'my-super-secret-key-123'",
+      "line_number": 206,
+      "line_range": [
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "274     username = \"user@example.com\"\n275     password = \"password123\"\n276     is_authenticated = auth.authenticate_user(username, password)\n",
+      "col_offset": 15,
+      "end_col_offset": 28,
+      "filename": ".\\app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password123'",
+      "line_number": 275,
+      "line_range": [
+        275
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    }
+  ]
+}

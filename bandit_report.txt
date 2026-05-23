@@ -1,0 +1,141 @@
+Run started:2026-05-23 06:43:21.600458+00:00
+
+Test results:
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: .\app.py:21:0
+20	import hashlib
+21	import subprocess
+22	import sqlite3
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'admin123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: .\app.py:32:20
+31	API_KEY = "sk-1234567890abcdefghijklmnop"  # Hardcoded API key
+32	DATABASE_PASSWORD = "admin123"  # Hardcoded database password
+33	SECRET_TOKEN = "my-secret-token-12345"  # Hardcoded secret
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'my-secret-token-12345'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: .\app.py:33:15
+32	DATABASE_PASSWORD = "admin123"  # Hardcoded database password
+33	SECRET_TOKEN = "my-secret-token-12345"  # Hardcoded secret
+34	
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'password123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: .\app.py:43:23
+42	        self.db_user = "admin"
+43	        self.db_pass = "password123"
+44	        self.db_host = "localhost"
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b324_hashlib.html
+   Location: .\app.py:75:15
+74	        # VULNERABLE: Using MD5 hash (deprecated, fast brute-force attacks)
+75	        return hashlib.md5(password.encode()).hexdigest()
+76	
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Low
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html
+   Location: .\app.py:94:22
+93	            # Example attack: username="admin' --" bypasses password check
+94	            query = f"SELECT * FROM users WHERE username='{username}' AND password='{self.hash_password(password)}'"
+95	
+
+--------------------------------------------------
+>> Issue: [B602:subprocess_popen_with_shell_equals_true] subprocess call with shell=True identified, security issue.
+   Severity: High   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b602_subprocess_popen_with_shell_equals_true.html
+   Location: .\app.py:123:21
+122	            # Using shell=True makes it more dangerous
+123	            result = subprocess.run(command, shell=True, capture_output=True, text=True)
+124	            
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'SuperSecret123!'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: .\app.py:201:8
+200	        "db_user": "admin",
+201	        "db_pass": "SuperSecret123!",  # Hardcoded password
+202	        "api_endpoint": "https://api.example.com",
+203	        "api_key": "sk_live_51234567890",  # Live API key hardcoded
+204	        "debug_mode": True,  # Debug mode enabled in production
+205	        "log_level": "DEBUG",  # Debug logging enabled
+206	        "jwt_secret": "my-super-secret-key-123",  # JWT secret hardcoded
+207	    }
+208	
+209	    @staticmethod
+210	    def get_config(key: str) -> str:
+211	        """Get configuration value."""
+212	        return ConfigManager.CONFIG.get(key, "")
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'my-super-secret-key-123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: .\app.py:206:8
+205	        "log_level": "DEBUG",  # Debug logging enabled
+206	        "jwt_secret": "my-super-secret-key-123",  # JWT secret hardcoded
+207	    }
+208	
+209	    @staticmethod
+210	    def get_config(key: str) -> str:
+211	        """Get configuration value."""
+212	        return ConfigManager.CONFIG.get(key, "")
+213	
+214	
+215	class FileHandler:
+216	    """Handles file operations with security issues."""
+217	
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'password123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: .\app.py:275:15
+274	    username = "user@example.com"
+275	    password = "password123"
+276	    is_authenticated = auth.authenticate_user(username, password)
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 203
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 7
+		Medium: 1
+		High: 2
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 1
+		Medium: 6
+		High: 3
+Files skipped (0):
